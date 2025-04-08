@@ -96,7 +96,6 @@ volumes:
 networks:
   monitoring:
     driver: bridge
-
 ```
 
 ### 3. **Configuración de Prometheus**
@@ -142,19 +141,21 @@ scrape_configs:
 Las siguientes consultas fueron creadas en Prometheus y mostradas en paneles de Grafana:
 
 - **P90** de la duración de solicitudes HTTP:
-  ```prometheus
+```prometheus
 histogram_quantile(0.90, sum(rate(demo_api_request_duration_seconds_bucket[5m])) by (le, path, method, status))
-  ```
+```
   
 - **P95** de la duración de solicitudes HTTP:
-  ```prometheus
+```prometheus
 histogram_quantile(0.95, sum(rate(demo_api_request_duration_seconds_bucket[5m])) by (le, path, method))
-  ```
+```
+
 
 - Promedio de duración de solicitudes HTTP:
-  ```prometheus
+```prometheus
 sum(rate(demo_api_request_duration_seconds_sum[5m])) by (path, method) /
-sum(rate(demo_api_request_duration_seconds_count[5m])) by (path, method) ```
+sum(rate(demo_api_request_duration_seconds_count[5m])) by (path, method)
+```
 
 ### 5. **Dashboard en Grafana - Recursos de Cómputo**
 
